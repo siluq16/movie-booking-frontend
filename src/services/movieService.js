@@ -2,177 +2,177 @@ import api from './api'
 
 // ─── MOVIES ──────────────────────────────────────────────────────────────────
 export const movieService = {
-  getAll:        ()           => api.get('/movies'),
-  getNowShowing: ()           => api.get('/movies/now-showing'),
-  getById:       (id)         => api.get(`/movies/${id}`),
-  create:        (data)       => api.post('/movies', data),
-  update:        (id, data)   => api.put(`/movies/${id}`, data),
-  delete:        (id)         => api.delete(`/movies/${id}`),
+  getAll:        ()           => api.get('/Movies'),
+  getNowShowing: ()           => api.get('/Movies/now-showing'),
+  getById:       (id)         => api.get(`/Movies/${id}`),
+  create:        (data)       => api.post('/Movies', data),
+  update:        (id, data)   => api.put(`/Movies/${id}`, data),
+  delete:        (id)         => api.delete(`/Movies/${id}`),
 }
 
 // ─── REVIEWS ─────────────────────────────────────────────────────────────────
 export const reviewService = {
-  getByMovie:  (movieId) => api.get(`/reviews/movie/${movieId}`),
-  create:      (data)    => api.post('/reviews', data),
-  update:      (id, data) => api.put(`/reviews/${id}`, data),
-  delete:      (id)      => api.delete(`/reviews/${id}`),
+  getByMovie:  (movieId) => api.get(`/Reviews/movie/${movieId}`),
+  create:      (data)    => api.post('/Reviews', data),
+  update:      (id, data) => api.put(`/Reviews/${id}`, data),
+  delete:      (id)      => api.delete(`/Reviews/${id}`),
 }
 
 // ─── SHOWTIMES ───────────────────────────────────────────────────────────────
 export const showtimeService = {
-  getAll:       ()                          => api.get('/showtimes'),
-  getUpcoming: ()                          => api.get('/showtimes/upcoming'),
-  getById:     (id)                        => api.get(`/showtimes/${id}`),
-  getSeats:    (id)                        => api.get(`/showtimes/${id}/seats`),
-  create:      (data)                      => api.post('/showtimes', data),
-  cancel:      (id)                        => api.put(`/showtimes/${id}/cancel`),
+  getAll:       ()                          => api.get('/Showtimes'),
+  getUpcoming: ()                          => api.get('/Showtimes/upcoming'),
+  getById:     (id)                        => api.get(`/Showtimes/${id}`),
+  getSeats:    (id)                        => api.get(`/Showtimes/${id}/seats`),
+  create:      (data)                      => api.post('/Showtimes', data),
+  cancel:      (id)                        => api.put(`/Showtimes/${id}/cancel`),
   search: (date, movieId, cinemaId) => {
     const params = new URLSearchParams({ date: date.toISOString() })
     if (movieId)  params.append('movieId', movieId) 
     if (cinemaId) params.append('cinemaId', cinemaId)
-    return api.get(`/showtimes/search?${params}`)
+    return api.get(`/Showtimes/search?${params}`)
   },
 }
 
 // ─── CINEMAS ─────────────────────────────────────────────────────────────────
 export const cinemaService = {
-  getAll:    ()           => api.get('/cinemas'),
-  getById:   (id)         => api.get(`/cinemas/${id}`),
-  create:    (data)       => api.post('/cinemas', data),
-  update:    (id, data)   => api.put(`/cinemas/${id}`, data),
-  delete:    (id)         => api.delete(`/cinemas/${id}`),
+  getAll:    ()           => api.get('/Cinemas'),
+  getById:   (id)         => api.get(`/Cinemas/${id}`),
+  create:    (data)       => api.post('/Cinemas', data),
+  update:    (id, data)   => api.put(`/Cinemas/${id}`, data),
+  delete:    (id)         => api.delete(`/Cinemas/${id}`),
 }
 
 // ─── SCREENING ROOMS ─────────────────────────────────────────────────────────
 export const roomService = {
-  getAll:        ()          => api.get('/screeningrooms'),
-  getByCinema:   (cinemaId)  => api.get(`/screeningrooms/cinema/${cinemaId}`),
-  getById:       (id)        => api.get(`/screeningrooms/${id}`),
-  create:        (data)      => api.post('/screeningrooms', data),
-  update:        (id, data)  => api.put(`/screeningrooms/${id}`, data),
-  delete:        (id)        => api.delete(`/screeningrooms/${id}`),
+  getAll:        ()          => api.get('/ScreeningRooms'),
+  getByCinema:   (cinemaId)  => api.get(`/ScreeningRooms/cinema/${cinemaId}`),
+  getById:       (id)        => api.get(`/ScreeningRooms/${id}`),
+  create:        (data)      => api.post('/ScreeningRooms', data),
+  update:        (id, data)  => api.put(`/ScreeningRooms/${id}`, data),
+  delete:        (id)        => api.delete(`/ScreeningRooms/${id}`),
 }
 
 // ─── SEAT LAYOUTS ────────────────────────────────────────────────────────────
 export const seatService = {
-  getByRoom: (roomId) => api.get(`/seatlayouts/room/${roomId}`),
-  generate:  (data)   => api.post('/seatlayouts/generate', data),
-  update:   (data)    => api.put('/seatLayouts/update-seat-types', data),
+  getByRoom: (roomId) => api.get(`/SeatLayouts/room/${roomId}`),
+  generate:  (data)   => api.post('/SeatLayouts/generate', data),
+  update:   (data)    => api.put('/SeatLayouts/update-seat-types', data),
 }
 
 // ─── FOOD ────────────────────────────────────────────────────────────────────
 export const foodService = {
-  getCategories:   ()          => api.get('/food/categories'),
-  createCategory:  (data)      => api.post('/food/categories', data),
-  updateCategory:  (id, data)  => api.put(`/food/categories/${id}`, data),
+  getCategories:   ()          => api.get('/Food/Categories'),
+  createCategory:  (data)      => api.post('/Food/Categories', data),
+  updateCategory:  (id, data)  => api.put(`/Food/Categories/${id}`, data),
 
-  getItems:        ()          => api.get('/food/items'),
-  getItemsByCategory: (catId)  => api.get(`/food/items/category/${catId}`),
-  getItemById:     (id)        => api.get(`/food/items/${id}`),
-  createItem:      (data)      => api.post('/food/items', data),
-  updateItem:      (id, data)  => api.put(`/food/items/${id}`, data),
-  deleteItem:      (id)        => api.delete(`/food/items/${id}`),
+  getItems:        ()          => api.get('/Food/Items'),
+  getItemsByCategory: (catId)  => api.get(`/Food/Items/Category/${catId}`),
+  getItemById:     (id)        => api.get(`/Food/Items/${id}`),
+  createItem:      (data)      => api.post('/Food/Items', data),
+  updateItem:      (id, data)  => api.put(`/Food/Items/${id}`, data),
+  deleteItem:      (id)        => api.delete(`/Food/Items/${id}`),
 
-  getComboItems:   (comboId)   => api.get(`/food/combos/${comboId}/items`),
-  updateCombo:     (comboId, items) => api.post(`/food/combos/${comboId}/items`, items),
+  getComboItems:   (comboId)   => api.get(`/Food/Combos/${comboId}/items`),
+  updateCombo:     (comboId, items) => api.post(`/Food/Combos/${comboId}/items`, items),
 }
 
 // ─── BOOKINGS ────────────────────────────────────────────────────────────────
 export const bookingService = {
-  create:       (data)         => api.post('/bookings', data),
-  getById:      (id)           => api.get(`/bookings/${id}`),
-  addFood:      (id, items)    => api.put(`/bookings/${id}/food`, items),
-  applyPromo:   (id, code)     => api.post(`/bookings/${id}/apply-promotion`, { promotionCode: code }),
-  removePromo: (id) => api.delete(`/bookings/${id}/remove-promotion`),
-  getAll:       ()             => api.get('/bookings'),
-  getByUser:    (userId)       => api.get(`/users/${userId}/bookings`),
-  clearPending: (showtimeId) => api.delete(`/bookings/clear-pending/${showtimeId}`)
+  create:       (data)         => api.post('/Bookings', data),
+  getById:      (id)           => api.get(`/Bookings/${id}`),
+  addFood:      (id, items)    => api.put(`/Bookings/${id}/food`, items),
+  applyPromo:   (id, code)     => api.post(`/Bookings/${id}/apply-promotion`, { promotionCode: code }),
+  removePromo: (id) => api.delete(`/Bookings/${id}/remove-promotion`),
+  getAll:       ()             => api.get('/Bookings'),
+  getByUser:    (userId)       => api.get(`/Users/${userId}/bookings`),
+  clearPending: (showtimeId) => api.delete(`/Bookings/clear-pending/${showtimeId}`)
 }
 
 // ─── PAYMENTS ────────────────────────────────────────────────────────────────
 export const paymentService = {
-  process:        (data)       => api.post('/payments/process', data),
-  createVnPayUrl: (bookingId)  => api.post(`/payments/create-vnpay-url/${bookingId}`),
-  verifyVnPayReturn: (queryString) => api.get(`/payments/vnpay-return${queryString}`)
+  process:        (data)       => api.post('/Payments/process', data),
+  createVnPayUrl: (bookingId)  => api.post(`/Payments/create-vnpay-url/${bookingId}`),
+  verifyVnPayReturn: (queryString) => api.get(`/Payments/vnpay-return${queryString}`)
 }
 
 // ─── USERS ───────────────────────────────────────────────────────────────────
 export const userService = {
-  getAll:          ()              => api.get('/users'),
-  getById:         (id)           => api.get(`/users/${id}`),
-  changePassword:  (id, data)     => api.post(`/users/${id}/change-password`, data),
-  updateProfile: (id, data) => api.put(`/users/${id}`, data),
-  getBookings:     (id)           => api.get(`/users/${id}/bookings`),
-  toggleLock:      (id)           => api.patch(`/users/${id}/toggle-lock`),
-  updateRole:      (id, role)     => api.patch(`/users/${id}/role`, { role }),
+  getAll:          ()              => api.get('/Users'),
+  getById:         (id)           => api.get(`/Users/${id}`),
+  changePassword:  (id, data)     => api.post(`/Users/${id}/change-password`, data),
+  updateProfile: (id, data) => api.put(`/Users/${id}`, data),
+  getBookings:     (id)           => api.get(`/Users/${id}/bookings`),
+  toggleLock:      (id)           => api.patch(`/Users/${id}/toggle-lock`),
+  updateRole:      (id, role)     => api.patch(`/Users/${id}/role`, { role }),
 }
 
 // ─── MEMBERSHIP ──────────────────────────────────────────────────────────────
 export const membershipService = {
-  getMyCard:       ()             => api.get('/memberships/my-card'),
-  getTransactions: ()             => api.get('/memberships/transactions'),
+  getMyCard:       ()             => api.get('/Memberships/my-card'),
+  getTransactions: ()             => api.get('/Memberships/transactions'),
 }
 
 // ─── NOTIFICATIONS ───────────────────────────────────────────────────────────
 export const notificationService = {
-  getAll:         ()       => api.get('/notifications'),
-  getUnreadCount: ()       => api.get('/notifications/unread-count'),
-  markRead:       (id)     => api.patch(`/notifications/${id}/read`),
-  markAllRead:    ()       => api.patch('/notifications/read-all'),
+  getAll:         ()       => api.get('/Notifications'),
+  getUnreadCount: ()       => api.get('/Notifications/unread-count'),
+  markRead:       (id)     => api.patch(`/Notifications/${id}/read`),
+  markAllRead:    ()       => api.patch('/Notifications/read-all'),
 }
 
 // ─── GENRES ──────────────────────────────────────────────────────────────────
 export const genreService = {
-  getAll:   ()          => api.get('/genres'),
-  create:   (data)      => api.post('/genres', data),
-  update:   (id, data)  => api.put(`/genres/${id}`, data),
-  delete:   (id)        => api.delete(`/genres/${id}`),
+  getAll:   ()          => api.get('/Genres'),
+  create:   (data)      => api.post('/Genres', data),
+  update:   (id, data)  => api.put(`/Genres/${id}`, data),
+  delete:   (id)        => api.delete(`/Genres/${id}`),
 }
 
 // ─── DIRECTORS ───────────────────────────────────────────────────────────────
 export const directorService = {
-  getAll:   ()          => api.get('/directors'),
-  getById:  (id)        => api.get(`/directors/${id}`),
-  create:   (data)      => api.post('/directors', data),
-  update:   (id, data)  => api.put(`/directors/${id}`, data),
-  delete:   (id)        => api.delete(`/directors/${id}`),
+  getAll:   ()          => api.get('/Directors'),
+  getById:  (id)        => api.get(`/Directors/${id}`),
+  create:   (data)      => api.post('/Directors', data),
+  update:   (id, data)  => api.put(`/Directors/${id}`, data),
+  delete:   (id)        => api.delete(`/Directors/${id}`),
 }
 
 // ─── CAST MEMBERS ────────────────────────────────────────────────────────────
 export const castService = {
-  getAll:   ()          => api.get('/castmembers'),
-  getById:  (id)        => api.get(`/castmembers/${id}`),
-  create:   (data)      => api.post('/castmembers', data),
-  update:   (id, data)  => api.put(`/castmembers/${id}`, data),
-  delete:   (id)        => api.delete(`/castmembers/${id}`),
+  getAll:   ()          => api.get('/CastMembers'),
+  getById:  (id)        => api.get(`/CastMembers/${id}`),
+  create:   (data)      => api.post('/CastMembers', data),
+  update:   (id, data)  => api.put(`/CastMembers/${id}`, data),
+  delete:   (id)        => api.delete(`/CastMembers/${id}`),
 }
 
 // ─── PROMOTIONS ──────────────────────────────────────────────────────────────
 export const promotionService = {
-  getAll:   ()          => api.get('/promotions'),
-  getById:  (id)        => api.get(`/promotions/${id}`),
-  create:   (data)      => api.post('/promotions', data),
-  update:   (id, data)  => api.put(`/promotions/${id}`, data),
+  getAll:   ()          => api.get('/Promotions'),
+  getById:  (id)        => api.get(`/Promotions/${id}`),
+  create:   (data)      => api.post('/Promotions', data),
+  update:   (id, data)  => api.put(`/Promotions/${id}`, data),
   // DELETE thực chất là vô hiệu hóa (soft delete)
-  disable:  (id)        => api.delete(`/promotions/${id}`),
+  disable:  (id)        => api.delete(`/Promotions/${id}`),
 }
 
 // ─── PRICING ─────────────────────────────────────────────────────────────────
 export const pricingService = {
-  getRules:      ()          => api.get('/pricings/rules'),
-  createRule:    (data)      => api.post('/pricings/rules', data),
-  updateRule:    (id, data)  => api.put(`/pricings/rules/${id}`, data),
-  toggleRule:    (id)        => api.patch(`/pricings/rules/${id}/toggle`),
+  getRules:      ()          => api.get('/Pricings/rules'),
+  createRule:    (data)      => api.post('/Pricings/rules', data),
+  updateRule:    (id, data)  => api.put(`/Pricings/rules/${id}`, data),
+  toggleRule:    (id)        => api.patch(`/Pricings/rules/${id}/toggle`),
 
-  getHolidays:   ()          => api.get('/pricings/holidays'),
-  createHoliday: (data)      => api.post('/pricings/holidays', data),
-  updateHoliday: (id, data)  => api.put(`/pricings/holidays/${id}`, data),
-  deleteHoliday: (id)        => api.delete(`/pricings/holidays/${id}`),
+  getHolidays:   ()          => api.get('/Pricings/holidays'),
+  createHoliday: (data)      => api.post('/Pricings/holidays', data),
+  updateHoliday: (id, data)  => api.put(`/Pricings/holidays/${id}`, data),
+  deleteHoliday: (id)        => api.delete(`/Pricings/holidays/${id}`),
 }
 
 // ─── REVENUE (View) ──────────────────────────────────────────────────────────
 export const revenueService = {
-  getCinemaRevenue: ()  => api.get('/cinemarevenue'), // Hoặc '/revenue' tùy theo controller của bạn
-  getMonthlyRevenue: (year) => api.get(`/cinemarevenue/monthly?year=${year}`),
-  getWeeklyRevenue: ()  => api.get('/cinemarevenue/weekly'),
+  getCinemaRevenue: ()  => api.get('/CinemaRevenue'), // Hoặc '/revenue' tùy theo controller của bạn
+  getMonthlyRevenue: (year) => api.get(`/CinemaRevenue/monthly?year=${year}`),
+  getWeeklyRevenue: ()  => api.get('/CinemaRevenue/weekly'),
 }
