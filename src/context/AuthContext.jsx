@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { userService } from '../services/movieService'
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext(null)
 
@@ -19,13 +20,26 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = (loginResponse) => {
-    const { token, userId, fullName, role, avatarUrl } = loginResponse
-    const userObj = { id: userId, fullName, role, avatarUrl }
-    localStorage.setItem('token', token)
-    localStorage.setItem('user', JSON.stringify(userObj))
-    setToken(token)
-    setUser(userObj)
-  }
+    const { token, userId, fullName, role, avatarUrl } = loginResponse;
+    const userObj = { id: userId, fullName, role, avatarUrl };
+    
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(userObj));
+    setToken(token);
+    setUser(userObj);
+
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    const timeLeft = decoded.exp - currentTime; 
+
+    if (timeLeft > 0) {
+        setTimeout(() => {
+            alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
+            logout();
+            window.location.href = '/login';
+        }, timeLeft * 1000);
+    }
+}
 
   const logout = () => {
     localStorage.removeItem('token')

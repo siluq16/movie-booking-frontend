@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { useDebounce } from "../../hooks/useDebounce";
 import { membershipService, bookingService, userService } from '../../services/movieService'
 import Spinner from '../../components/common/Spinner'
 import Button from '../../components/common/Button'
@@ -207,9 +208,15 @@ function BookingHistory({ userId }) {
   const ITEMS_PER_PAGE = 5 
 
   useEffect(() => {
+    if (!userId) return;
+
+    setLoading(true);
     userService.getBookings(userId)
       .then(r => setBookings(Array.isArray(r.data) ? r.data : []))
-      .catch(() => setBookings([]))
+      .catch((err) => {
+          console.error("Lỗi lấy bookings:", err);
+          setBookings([]);
+      })
       .finally(() => setLoading(false))
   }, [userId])
 
@@ -435,9 +442,6 @@ export default function ProfilePage() {
       .then(r => setCard(r.data))
       .catch(() => { })
 
-    if (reloadUser) {
-      reloadUser();
-    }
   }, [])
 
   const tier = TIERS[card?.tier] || TIERS.silver
