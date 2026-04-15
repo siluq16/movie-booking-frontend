@@ -9,9 +9,9 @@ import { isStrongPassword } from '../../utils/validators'
 import toast from 'react-hot-toast'
 
 const TIERS = {
-  silver: { label: 'Bạc', icon: '🥈', color: '#C0C0C0', bg: 'rgba(192,192,192,.08)', nextTier: 'gold', nextPts: 500, perks: ['Tích điểm x1', 'Xem trailer độc quyền', 'Ưu tiên đặt vé'] },
-  gold: { label: 'Vàng', icon: '🥇', color: '#C9A84C', bg: 'rgba(201,168,76,.08)', nextTier: 'platinum', nextPts: 2000, perks: ['Tích điểm x1.5', 'Giảm 10% mọi đơn', 'Quà sinh nhật', 'Ghế VIP ưu tiên'] },
-  platinum: { label: 'Bạch kim', icon: '💎', color: '#E5E4E2', bg: 'rgba(229,228,226,.06)', nextTier: 'diamond', nextPts: 5000, perks: ['Tích điểm x2', 'Vé miễn phí hàng tháng', 'Phòng VIP', 'Hỗ trợ 24/7'] },
+  silver: { label: 'Bạc', icon: '🥈', color: '#C0C0C0', bg: 'rgba(192,192,192,.08)', nextTier: 'gold', nextPts: 2000, perks: ['Tích điểm x1', 'Xem trailer độc quyền', 'Ưu tiên đặt vé'] },
+  gold: { label: 'Vàng', icon: '🥇', color: '#C9A84C', bg: 'rgba(201,168,76,.08)', nextTier: 'platinum', nextPts: 5000, perks: ['Tích điểm x1.5', 'Giảm 10% mọi đơn', 'Quà sinh nhật', 'Ghế VIP ưu tiên'] },
+  platinum: { label: 'Bạch kim', icon: '💎', color: '#E5E4E2', bg: 'rgba(229,228,226,.06)', nextTier: 'diamond', nextPts: 20000, perks: ['Tích điểm x2', 'Vé miễn phí hàng tháng', 'Phòng VIP', 'Hỗ trợ 24/7'] },
   diamond: { label: 'Kim cương', icon: '💠', color: '#b9f2ff', bg: 'rgba(185,242,255,.05)', nextTier: null, nextPts: null, perks: ['Tích điểm x3', 'Vé IMAX x2/tháng', 'Phòng riêng', 'Concierge cá nhân', 'Quà độc quyền hàng quý'] },
 }
 
@@ -204,7 +204,7 @@ function BookingHistory({ userId }) {
   const [filter, setFilter] = useState('all')
   
   const [currentPage, setCurrentPage] = useState(1)
-  const ITEMS_PER_PAGE = 5 // Số lượng vé hiển thị trên 1 trang (bạn có thể đổi thành 10)
+  const ITEMS_PER_PAGE = 5 
 
   useEffect(() => {
     userService.getBookings(userId)
